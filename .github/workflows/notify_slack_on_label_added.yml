@@ -13,13 +13,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Notify Slack
-        env:
-          if: |
+        if: |
           (
             (github.event.action == 'labeled' && github.event.label.name == 'bug')
             ||
             (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'bug'))
           )
+        env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MENTION: "@channel"  # メンションを追加
         run: |
