@@ -17,7 +17,19 @@ jobs:
         )
       )
     steps:
-      - uses: actions/checkout@v1
-      - uses: HeRoMo/pronto-action@v1.10.0
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ruby-version: 2.x  # またはプロジェクトに合ったバージョンを指定
+
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Install Gems
+        run: bundle install
+
+      - name: Run Pronto
+        run: bundle exec pronto
