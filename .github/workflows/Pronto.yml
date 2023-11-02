@@ -5,19 +5,17 @@ on:
 jobs:
   pronto:
     runs-on: ubuntu-latest
-    # ↓ 追加
     if: |
-  (
-    (github.event.action == 'labeled' && 
-      github.event.label.name == 'bug'
-    )
-    ||
-    (
-      github.event.action == 'synchronize' &&
-      contains(github.event.pull_request.labels.*.name, 'bug')
-    )
-  )
-    # ↑ 追加
+      (
+        (github.event.action == 'labeled' && 
+          github.event.label.name == 'bug'
+        )
+        ||
+        (
+          github.event.action == 'synchronize' &&
+          contains(github.event.pull_request.labels.*.name, 'bug')
+        )
+      )
     steps:
       - uses: actions/checkout@v1
       - uses: HeRoMo/pronto-action@v1.10.0
