@@ -14,6 +14,12 @@ jobs:
 
       - name: Notify Slack
         env:
+          if: |
+          (
+            (github.event.action == 'labeled' && github.event.label.name == 'bug')
+            ||
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'bug'))
+          )
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MENTION: "@channel"  # メンションを追加
         run: |
