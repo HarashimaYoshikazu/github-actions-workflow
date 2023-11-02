@@ -15,9 +15,9 @@ jobs:
       - name: Notify Slack
         if: |
           (
-            (github.event.action == 'labeled' && github.event.label.name == 'bug')
+            (github.event.action == 'labeled' && github.event.label.name == '緊急🔥')
             ||
-            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'bug'))
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '緊急🔥'))
           )
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
