@@ -26,5 +26,6 @@ jobs:
           label_name="${{ github.event.label.name }}"
           pr_number="${{ github.event.number }}"
           pr_url="${{ github.event.pull_request.html_url }}"
+          channel="#github_pr"  # チャンネル名を指定
           message="Label added to PR: $label_name\nPR: $pr_url"
-          curl -X POST -H 'Content-type: application/json' --data "{'text':'$message'}" $SLACK_WEBHOOK_URL
+          curl -X POST -H 'Content-type: application/json' --data "{'text':'$message', 'channel':'$channel'}" $SLACK_WEBHOOK_URL
