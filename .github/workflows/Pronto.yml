@@ -7,10 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     # ↓ 追加
     if: |
-      ((github.event.action == 'labeled') && 
-        (github.event.label.name == 'bug')) ||
-      ((github.event.action == 'synchronize') &&
-        contains(github.event.pull_request.labels.*.name, 'bug')
+  (
+    (github.event.action == 'labeled' && 
+      github.event.label.name == 'bug'
+    )
+    ||
+    (
+      github.event.action == 'synchronize' &&
+      contains(github.event.pull_request.labels.*.name, 'bug')
+    )
+  )
     # ↑ 追加
     steps:
       - uses: actions/checkout@v1
