@@ -21,7 +21,7 @@ jobs:
           )
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MENTION: "@channel "  # メンションを追加
+          SLACK_MENTION: "@channel @harashima318 @here"  # メンションを追加
         run: |
           label_name="${{ github.event.label.name }}"
           pr_number="${{ github.event.number }}"
