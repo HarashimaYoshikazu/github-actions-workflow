@@ -22,5 +22,5 @@ jobs:
           pr_number="${{ github.event.number }}"
           pr_url="${{ github.event.pull_request.html_url }}"
           channel="#github_pr"  # チャンネル名を指定
-          message="ラベルの種類: $label_name\nPR: $pr_url $SLACK_MENTION"  # メンションをメッセージに追加
+          message="コメントしました $pr_url $SLACK_MENTION"  # メンションをメッセージに追加
           curl -X POST -H 'Content-type: application/json' --data "{'text':'$message', 'channel':'$channel'}" $SLACK_WEBHOOK_URL
