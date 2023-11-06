@@ -15,9 +15,9 @@ jobs:
       - name: Notify Discord
         if: |
           (
-            (github.event.action == 'labeled' && github.event.label.name == 'test')
+            (github.event.action == 'labeled' && github.event.label.name == '緊急')
             ||
-            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'test'))
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '緊急'))
           )
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_AS_BOT }}
@@ -26,4 +26,4 @@ jobs:
           label_name="${{ github.event.label.name }}"
           pr_url="${{ github.event.pull_request.html_url }}"
           message="ラベルの種類: $label_name\nPR: $pr_url $DISCORD_MENTION"  # メンションをメッセージに追加
-          curl -X POST -H "Content-Type: application/json" -d "$message" "$DISCORD_WEBHOOK_URL"
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"message\"}" "$DISCORD_WEBHOOK_URL"
