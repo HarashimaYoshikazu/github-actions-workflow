@@ -23,6 +23,6 @@ jobs:
           curl -H "Content-Type: application/json" \
           -X POST \
           -d '{
-            "content": "ビルドが完了しました！ ${{ github.event.pull_request.html_url }}"
+            "content": "ビルドが完了しました！ @everyone ${{ github.event.pull_request.html_url }}"
           }' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
