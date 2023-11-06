@@ -25,6 +25,10 @@ jobs:
         with:
           webhook_id: ${{ secrets.DISCORD_ID }}
           webhook_token: ${{ secrets.DISCORD_TOKEN }}
-          color: "#48f442"
-          username: "GitHub Bot"
           status: ${{ job.status }}
+          title: "deploy"
+          description: "Build and deploy to GitHub Pages"
+          nofail: false
+          nodetail: false
+          color: 0x0000ff
+          username: GitHub Actions
