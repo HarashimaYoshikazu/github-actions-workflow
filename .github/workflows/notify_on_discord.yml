@@ -25,4 +25,4 @@ jobs:
           -d '{
             "content": "PRの確認をしてください！。 @everyone ${{ github.event.pull_request.html_url }}"
           }' \
-          ${{ secrets.DISCORD_WEBHOOK }}
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
