@@ -15,14 +15,14 @@ jobs:
       - name: Notify Discord
         if: |
           (
-            (github.event.action == 'labeled' && github.event.label.name == '緊急')
+            (github.event.action == 'labeled' && github.event.label.name == '要確認')
             ||
-            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '緊急'))
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '要確認'))
           )
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
           -d '{
-            "content": "ビルドが完了しました！ @everyone ${{ github.event.pull_request.html_url }}"
+            "content": "PRの確認をしてください！。 @everyone ${{ github.event.pull_request.html_url }}"
           }' \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ${{ secrets.DISCORD_WEBHOOK }}
