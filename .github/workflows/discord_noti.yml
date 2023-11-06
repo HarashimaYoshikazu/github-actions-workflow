@@ -20,7 +20,7 @@ jobs:
             (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '緊急'))
           )
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_AS_BOT }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_MENTION: "@everyone"  # メンションを追加
         run: |
           label_name="${{ github.event.label.name }}"
