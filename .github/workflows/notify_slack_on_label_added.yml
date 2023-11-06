@@ -20,7 +20,7 @@ jobs:
             (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '緊急🔥'))
           )
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_AS_BOT }}
           SLACK_MENTION: "<!channel>"  # メンションを追加
         run: |
           label_name="${{ github.event.label.name }}"
