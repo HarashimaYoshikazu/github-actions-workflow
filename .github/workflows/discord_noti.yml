@@ -1,0 +1,31 @@
+name: Notify Slack with Mention
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  notify_slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Notify Slack
+        if: |
+          (
+            (github.event.action == 'labeled' && github.event.label.name == '緊急🔥')
+            ||
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '緊急🔥'))
+          )
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_AS_BOT }}
+          SLACK_MENTION: "<!channel>"  # メンションを追加
+        run: |
+          label_name="${{ github.event.label.name }}"
+          pr_number="${{ github.event.number }}"
+          pr_url="${{ github.event.pull_request.html_url }}"
+          channel="#github_pr"  # チャンネル名を指定
+          message="ラベルの種類: $label_name\nPR: $pr_url $SLACK_MENTION"  # メンションをメッセージに追加
+          curl -X POST -H 'Content-type: application/json' --data "{'text':'$message', 'channel':'$channel'}" $SLACK_WEBHOOK_URL
