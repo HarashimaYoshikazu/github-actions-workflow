@@ -25,4 +25,4 @@ jobs:
           webhook_token: ${{ secrets.DISCORD_TOKEN }}
           color: "#48f442"
           username: "GitHub Bot"
-          args: The ${{ github.event_name }} event triggered.
+          args: ${{ github.event.pull_request.html_url }} @everyone
