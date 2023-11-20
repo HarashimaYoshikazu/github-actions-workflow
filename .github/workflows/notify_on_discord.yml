@@ -1,0 +1,28 @@
+name: Notify Discord with Mention
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  notify_discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Notify Discord
+        if: |
+          (
+            (github.event.action == 'labeled' && github.event.label.name == '要確認')
+            ||
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, '要確認'))
+          )
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{
+            "content": "PRの確認をしてください！。 @everyone ${{ github.event.pull_request.html_url }}"
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
