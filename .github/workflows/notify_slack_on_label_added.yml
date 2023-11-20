@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify Slack
-        if: github.event.label.name == '緊急🔥'
+        if: github.event.label.name == ${{ vars.HIGH_PRIORITY_LABEL }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_AS_BOT }}
           SLACK_MENTION: "<!channel>"  # メンションを追加
